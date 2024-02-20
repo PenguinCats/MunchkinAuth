@@ -3,7 +3,7 @@ package authentication
 import (
 	"errors"
 
-	"github.com/PenguinCats/MunchkinAuth/src/authServer/pkg/common/constants"
+	"github.com/PenguinCats/MunchkinAuth/src/MunchkinAuth/pkg/common/constants"
 	"github.com/gin-gonic/gin"
 )
 

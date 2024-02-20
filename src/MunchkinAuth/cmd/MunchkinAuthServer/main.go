@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/PenguinCats/MunchkinAuth/src/authServer/pkg"
+	"github.com/PenguinCats/MunchkinAuth/src/MunchkinAuth/pkg"
 	"gopkg.in/ini.v1"
 )
 

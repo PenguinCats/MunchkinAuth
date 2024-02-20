@@ -1,4 +1,4 @@
-module github.com/PenguinCats/MunchkinAuth/src/authServer
+module github.com/PenguinCats/MunchkinAuth/src/MunchkinAuth
 
 go 1.22.0
 

@@ -1,0 +1,27 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- script: |
+    cd ./src/MunchkinAuth
+    echo "Fetching dependencies..."
+    go get -v -t -d ./...
+  displayName: 'Change directory and Get dependencies'
+
+- script: |
+    echo "Building MunchkinAuthServer..."
+    go build -v ./cmd/MunchkinAuthServer
+  displayName: 'Build MunchkinAuthServer'
+
+- script: |
+    echo "Running tests..."
+    go test -v ./...
+  displayName: 'Run tests'

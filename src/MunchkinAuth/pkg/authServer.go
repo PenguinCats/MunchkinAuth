@@ -1,7 +1,7 @@
 package pkg
 
 import (
-	"github.com/PenguinCats/MunchkinAuth/src/authServer/pkg/authentication"
+	"github.com/PenguinCats/MunchkinAuth/src/MunchkinAuth/pkg/authentication"
 	"github.com/gin-gonic/gin"
 )
 
