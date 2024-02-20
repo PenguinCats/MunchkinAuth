@@ -1,6 +1,6 @@
 module github.com/PenguinCats/MunchkinAuth/src/MunchkinAuth
 
-go 1.22.0
+go 1.22
 
 require (
 	github.com/bytedance/sonic v1.9.1 // indirect
