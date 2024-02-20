@@ -16,16 +16,15 @@ steps:
 
     echo "Fetching dependencies..."
     go get -v -t -d ./...
-  displayName: 'Change directory and Get dependencies'
 
-- script: |
-    pwd
-    ls -la
     echo "Building MunchkinAuthServer..."
     go build -v ./cmd/MunchkinAuthServer
-  displayName: 'Build MunchkinAuthServer'
+  displayName: 'Get dependencies and Build MunchkinAuthServer'
 
 - script: |
+    echo "Change directory to MunchkinAuth..."
+    cd ./src/MunchkinAuth
+    
     echo "Running tests..."
     go test -v ./...
   displayName: 'Run tests'
