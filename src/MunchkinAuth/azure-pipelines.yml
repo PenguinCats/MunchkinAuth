@@ -13,18 +13,18 @@ steps:
 - script: |
     echo "Change directory to MunchkinAuth..."
     cd ./src/MunchkinAuth
+  
+- task: GoTool@0
+  inputs:
+    version: '1.22.0'
+  
+- task: Go@0
+  inputs:
+    command: 'get'
+    arguments: '-d -v -t'
 
-    echo "Fetching dependencies..."
-    go get -v -t -d ./...
-
-    echo "Building MunchkinAuthServer..."
-    go build -v ./cmd/MunchkinAuthServer
-  displayName: 'Get dependencies and Build MunchkinAuthServer'
-
-- script: |
-    echo "Change directory to MunchkinAuth..."
-    cd ./src/MunchkinAuth
-    
-    echo "Running tests..."
-    go test -v ./...
-  displayName: 'Run tests'
+- task: Go@0
+  inputs:
+    command: 'build'
+    workingDirectory: './cmd/MunchkinAuthServer'
+    arguments: '-o "./out/MunchkinAuthServer"'
