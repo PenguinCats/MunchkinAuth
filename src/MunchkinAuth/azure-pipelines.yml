@@ -9,22 +9,24 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+variables:
+  projectPath: '$(system.defaultWorkingDirectory)/src/MunchkinAuth'
+
 steps:
-- script: |
-    echo "Change directory to MunchkinAuth..."
-    cd ./src/MunchkinAuth
-  
 - task: GoTool@0
   inputs:
     version: '1.22.0'
+    workingDirectory: '$(projectPath)'
   
 - task: Go@0
   inputs:
     command: 'get'
     arguments: '-d -v -t'
+    workingDirectory: '$(projectPath)'
 
 - task: Go@0
   inputs:
     command: 'build'
-    workingDirectory: './cmd/MunchkinAuthServer'
+    arguments: './cmd/MunchkinAuthServer'
     arguments: '-o "./out/MunchkinAuthServer"'
+    workingDirectory: '$(projectPath)'
