@@ -27,5 +27,5 @@ steps:
 - task: Go@0
   inputs:
     command: 'build'
-    arguments: './cmd/MunchkinAuthServer -o "./out/MunchkinAuthServer"'
+    arguments: '-o "./out/MunchkinAuthServer" ./cmd/MunchkinAuthServer '
     workingDirectory: '$(projectPath)'
