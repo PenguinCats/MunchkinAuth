@@ -13,6 +13,9 @@ variables:
   projectPath: '$(system.defaultWorkingDirectory)/src/MunchkinAuth'
 
 steps:
+- script: echo $(projectPath)
+  displayName: 'Run a one-line script'
+
 - task: GoTool@0
   inputs:
     version: '1.22.0'
