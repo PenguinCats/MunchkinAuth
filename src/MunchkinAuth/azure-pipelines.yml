@@ -23,15 +23,25 @@ steps:
   inputs:
     version: '1.22.0'
     workingDirectory: $(projectPath)
+  displayName: 'Set Go version'
   
 - task: Go@0
   inputs:
     command: 'get'
     arguments: '-d -v -t ./...'
     workingDirectory: $(projectPath)
+  displayName: 'Get dependencies'
 
 - task: Go@0
   inputs:
     command: 'build'
     arguments: '-o "./out/MunchkinAuthServer" ./cmd/MunchkinAuthServer '
     workingDirectory: $(projectPath)
+  displayName: 'Build'
+
+- task: Go@0
+  inputs:
+    command: 'test'
+    arguments: '-v'
+    workingDirectory: '$(modulePath)'
+  displayName: 'Run tests'
