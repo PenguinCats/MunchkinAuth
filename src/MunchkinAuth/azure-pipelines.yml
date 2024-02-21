@@ -17,21 +17,21 @@ steps:
     pwd
     ls -la
     echo $(projectPath)
-  displayName: 'Run a one-line script'
+  displayName: 'Run script'
 
 - task: GoTool@0
   inputs:
     version: '1.22.0'
-    workingDirectory: '$(projectPath)'
+    workingDirectory: $(projectPath)
   
 - task: Go@0
   inputs:
     command: 'get'
     arguments: '-d -v -t'
-    workingDirectory: '$(projectPath)'
+    workingDirectory: $(projectPath)
 
 - task: Go@0
   inputs:
     command: 'build'
     arguments: '-o "./out/MunchkinAuthServer" ./cmd/MunchkinAuthServer '
-    workingDirectory: '$(projectPath)'
+    workingDirectory: $(projectPath)
