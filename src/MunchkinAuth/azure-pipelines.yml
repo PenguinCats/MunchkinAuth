@@ -27,7 +27,7 @@ steps:
 - task: Go@0
   inputs:
     command: 'get'
-    arguments: '-d -v -t'
+    arguments: '-d -v -t ./...'
     workingDirectory: $(projectPath)
 
 - task: Go@0
