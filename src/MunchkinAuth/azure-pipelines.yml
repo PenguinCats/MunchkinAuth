@@ -1,47 +1,38 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
+# Docker
+# Build and push an image to Azure Container Registry
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
 trigger:
 - main
 
-pool:
-  vmImage: ubuntu-latest
-
 variables:
+  # project information
   projectPath: '$(system.defaultWorkingDirectory)/src/MunchkinAuth'
 
-steps:
-- script: |
-    pwd
-    ls -la
-    echo $(projectPath)
-  displayName: 'Run script'
+  # Container registry service connection established during pipeline creation
+  dockerRegistryServiceConnection: '334e3ce9-19e9-476c-9a83-c9ebe54e1282'
+  imageRepository: 'munchkinauth'
+  containerRegistry: 'acr4munchkin.azurecr.io'
+  tag: '$(Build.BuildId)'
 
-- task: GoTool@0
-  inputs:
-    version: '1.22.0'
-    workingDirectory: $(projectPath)
-  displayName: 'Set Go version'
-  
-- task: Go@0
-  inputs:
-    command: 'get'
-    arguments: '-d -v -t ./...'
-    workingDirectory: $(projectPath)
-  displayName: 'Get dependencies'
+  # Agent VM image name
+  vmImageName: 'ubuntu-latest'
 
-- task: Go@0
-  inputs:
-    command: 'build'
-    arguments: '-o "./out/MunchkinAuthServer" ./cmd/MunchkinAuthServer '
-    workingDirectory: $(projectPath)
-  displayName: 'Build'
-
-- task: Go@0
-  inputs:
-    command: 'test'
-    arguments: '-v'
-    workingDirectory: '$(modulePath)'
-  displayName: 'Run tests'
+stages:
+- stage: Build
+  displayName: Build and push stage
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        buildContext : $(projectPath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
