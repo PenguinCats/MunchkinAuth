@@ -3,7 +3,7 @@ WORKDIR /app
 # COPY go.mod go.sum ./
 COPY . .
 RUN go mod download
-RUN GOOS=linux go build -a -o out/MunchkinAuthServer .
+RUN GOOS=linux go build -a -o out/MunchkinAuthServer ./cmd/MunchkinAuthServer
 RUN go test ./...
 
 
